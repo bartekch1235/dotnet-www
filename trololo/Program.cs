@@ -1,7 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+// Add services to the container
 builder.Services.AddMemoryCache();
 builder.Services.AddSession(options =>
 {

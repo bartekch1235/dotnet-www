@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using trololo.Models;
-
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 namespace trololo.Pages
 {
     public class IndexModel : PageModel
@@ -25,6 +26,21 @@ namespace trololo.Pages
             }
 
         }
+        //public IActionResult OnPost()
+        //{
+        //    if (string.IsNullOrWhiteSpace(Name))
+        //    {
+        //        Name = "User";
+
+        //    }
+        //    if (!ModelState.IsValid)
+        //    {
+
+        //        ViewData["a"] = FizzBuzz.CheckRange();
+        //    }
+        //    return Page();
+
+        //}
         public IActionResult OnPost()
         {
             if (string.IsNullOrWhiteSpace(Name))
@@ -32,15 +48,14 @@ namespace trololo.Pages
                 Name = "User";
 
             }
-            if (!ModelState.IsValid)
+            if (FizzBuzz.Check())
             {
-
-                ViewData["a"] = FizzBuzz.CheckRange();
+                HttpContext.Session.SetString("Data",JsonConvert.SerializeObject(FizzBuzz));
+                return RedirectToPage("./SavedInSession");
             }
-            return Page();
-
+            return Page();//RedirectToPage("./SavedInSession");
         }
-        
+
 
 
     }
