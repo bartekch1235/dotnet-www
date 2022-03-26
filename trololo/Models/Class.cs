@@ -21,14 +21,13 @@ namespace trololo.Models
                 
                 return "to nie powinno tu byc";
             }
-            if(Number%15==0)
-                return "FizzBuzz";
-            if (Number % 5 == 0)
-                return "Buzz";
-            if (Number % 3 == 0)
-                return "Fizz";
+            if(Number>2022||Number<1989)
+                return "zla data";
+            if (Imie.Length<100 )
+                return "zle imie";
+
             else
-                return "nieFajnaLiczba";
+                return "zle";
         }
         public bool Check()
         {
@@ -37,6 +36,12 @@ namespace trololo.Models
                 return true;
             }
             return false;
+        }
+        public string Przestepca()
+        {
+            if (Number % 4 == 0)
+                return "przestepca";
+                    return "nie przestepca";
         }
 
     }

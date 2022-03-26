@@ -13,7 +13,22 @@ ViewData["Title"] = "Fizz Buzz";
         <label asp-for="FizzBuzz.Imie"></label>
         <input asp-for="FizzBuzz.Imie" /><br />
         <button type="submit">Zatwierdź</button>
-        
+          @if (ViewData["a"] == "zla data")
+        {
+            <div class="alert alert-danger" role="alert">
+                nie zyles wtedy 
+            </div>
+        } @if (ViewData["a"] == "zle")
+        {
+            <div class="alert alert-danger" role="alert">
+                cos jest nie tak
+            </div>
+        } @if (ViewData["a"] == "zle imie")
+        {
+            <div class="alert alert-danger" role="alert">
+                nie nazywasz sie tak :/
+            </div>
+        }
 
         
 

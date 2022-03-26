@@ -1,13 +1,11 @@
 ﻿@page
+@using trololo.Pages
 @model SavedInSessionModel
 @{
 ViewData["Title"] = "Data in session";
 }
 <p>Dane w zapisane w sesji</p>
-@if (Model.FizzBuzz != null)
+@foreach (var item in Model.FizzBuzzList.lista)
 {
-<p>@Html.DisplayNameFor(model => Model.FizzBuzz.Number):
-@Model.FizzBuzz.Number </p>
-<p>@Html.DisplayNameFor(model => Model.FizzBuzz.Imie):
-@Model.FizzBuzz.Imie </p>
+ <p class="userData">@item.Imie , @item.Number - @item.Przestepca()</p>
 }

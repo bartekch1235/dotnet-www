@@ -15,10 +15,18 @@ namespace trololo.Pages
         }
         [BindProperty]
         public FizzBuzz FizzBuzz { get; set; }
+        
+
+        public ListFizzBuzz FizzBuzzList =new ListFizzBuzz();
+
         [BindProperty(SupportsGet = true)]
         public string Name { get; set; }
         public void OnGet()
         {
+            var Data2 = HttpContext.Session.GetString("Data2");
+            if (Data2 != null)
+                FizzBuzzList = JsonConvert.DeserializeObject<ListFizzBuzz>(Data2);
+            
             if (string.IsNullOrWhiteSpace(Name))
             {
                 Name = "User";
@@ -26,33 +34,26 @@ namespace trololo.Pages
             }
 
         }
-        //public IActionResult OnPost()
-        //{
-        //    if (string.IsNullOrWhiteSpace(Name))
-        //    {
-        //        Name = "User";
-
-        //    }
-        //    if (!ModelState.IsValid)
-        //    {
-
-        //        ViewData["a"] = FizzBuzz.CheckRange();
-        //    }
-        //    return Page();
-
-        //}
         public IActionResult OnPost()
         {
+            var Data2 = HttpContext.Session.GetString("Data2");
+            if (Data2 != null)
+                FizzBuzzList = JsonConvert.DeserializeObject<ListFizzBuzz>(Data2);
+
+
             if (string.IsNullOrWhiteSpace(Name))
             {
                 Name = "User";
 
             }
+
             if (FizzBuzz.Check())
             {
-                HttpContext.Session.SetString("Data",JsonConvert.SerializeObject(FizzBuzz));
+                FizzBuzzList.add(FizzBuzz);
+                HttpContext.Session.SetString("Data2",JsonConvert.SerializeObject(FizzBuzzList));
                 return RedirectToPage("./SavedInSession");
             }
+            ViewData["a"] = FizzBuzz.CheckRange();
             return Page();//RedirectToPage("./SavedInSession");
         }
 
